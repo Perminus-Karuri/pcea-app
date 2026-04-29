@@ -14,10 +14,7 @@
 
         <!-- LEFT SIDE IMAGE -->
         <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center bg-dark p-4">
-            <img src="{{ asset('images/church.jpg') }}"
-                 class="img-fluid rounded shadow"
-                 style="max-height: 85vh; object-fit: cover;"
-                 alt="Church Image">
+            <img src="{{ asset('images/Jesus is Lord.jpg') }}" class="img-fluid rounded shadow" style="max-height: 85vh; object-fit: cover;" alt="Church Image">
         </div>
 
         <!-- RIGHT SIDE FORM -->
