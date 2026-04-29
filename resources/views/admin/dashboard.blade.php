@@ -70,7 +70,7 @@
                         <div class="card shadow-sm border-0">
                             <div class="card-body">
                                 <h6 class="text-muted">Total Members</h6>
-                                <h3>120</h3>
+                                <h3>{{ $totalMembers }}</h3>
                             </div>
                         </div>
                     </div>
@@ -105,17 +105,17 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Phone</th>
-                                        <th>Zone</th>
                                         <th>Email</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($members as $member)
                                     <tr>
-                                        <td>John Doe</td>
-                                        <td>0712345678</td>
-                                        <td>Amani</td>
-                                        <td>johndoe@gmail.com</td>
+                                        <td>{{ $member->name }}</td>
+                                        <td>{{ $member->phone }}</td>
+                                        <td>{{ $member->email }}</td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

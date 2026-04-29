@@ -22,7 +22,10 @@
                     <li class="nav-item mx-4"><a class="nav-link" id="home" href="#">Home</a></li>
                     <li class="nav-item mx-4"><a class="nav-link" href="#">Group/Zones</a></li>
                     <li class="nav-item mx-4"><a class="nav-link" href="#announcement">Announcements</a></li>
-                    <li class="nav-item mx-4"><a class="nav-link" href="contributions.html">Contributions</a></li>
+                    <li class="nav-item mx-4"><a class="nav-link" href="#">Contributions</a></li>
+                    <li class="nav-item mx-4">
+                        <a class="nav-link text-warning" href="{{ route('profile.edit') }}">Profile</a>
+                    </li>
                     <li class="nav-item mx-4">
                         <a class="nav-link text-danger" href="{{ route('logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
