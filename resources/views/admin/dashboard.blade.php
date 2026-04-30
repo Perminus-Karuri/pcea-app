@@ -34,7 +34,7 @@
                         <a class="nav-link text-white" href="#">Announcements</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a class="nav-link text-white" href="#">Zones</a>
+                        <a class="nav-link text-white" href="{{ route('admin.zones') }}">Zones</a>
                     </li>
                     <li class="nav-item mb-2">
                         <a class="nav-link text-white" href="#">Groups</a>

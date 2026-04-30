@@ -20,7 +20,8 @@
             <div class="collapse navbar-collapse" id="nav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-4"><a class="nav-link" id="home" href="#">Home</a></li>
-                    <li class="nav-item mx-4"><a class="nav-link" href="#">Group/Zones</a></li>
+                    <li class="nav-item mx-4"><a class="nav-link" href="{{ route('member.zones') }}">Zones</a></li>
+                    <li class="nav-item mx-4"><a class="nav-link" href="#">Groups</a></li>
                     <li class="nav-item mx-4"><a class="nav-link" href="#announcement">Announcements</a></li>
                     <li class="nav-item mx-4"><a class="nav-link" href="#">Contributions</a></li>
                     <li class="nav-item mx-4">
@@ -36,8 +37,6 @@
                             @csrf
                         </form>
                     </li>
-                    <!-- <li class="nav-item"><a class="nav-link" href="registration.html"><span class="text-warning">Register</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html"><span class="text-warning">Login</span></a></li> -->
                 </ul>
             </div>
         </div>
