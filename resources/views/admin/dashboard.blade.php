@@ -25,13 +25,16 @@
 
                 <ul class="nav flex-column px-3">
                     <li class="nav-item mb-2">
-                        <a class="nav-link text-white" href="#">Members</a>
+                        <a class="nav-link active text-white" href="#">Members</a>
                     </li>
                     <li class="nav-item mb-2">
                         <a class="nav-link text-white" href="#">Contributions</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a class="nav-link text-white" href="#">Announcements</a>
+                        <a class="nav-link text-white {{ request()->routeIs('admin.announcements') ? 'active' : '' }}"
+                            href="{{ route('admin.announcements') }}">
+                                Announcements
+                        </a>
                     </li>
                     <li class="nav-item mb-2">
                         <a class="nav-link text-white" href="{{ route('admin.zones') }}">Zones</a>

@@ -24,7 +24,8 @@
             <div class="w-100" style="max-width: 500px;">
 
                 <div class="text-center mb-4">
-                    <h2 class="fw-bold">Login to your Account</h2>
+                    <h2 class="fw-bold text-success">PCEA Chaka Town Church</h2>
+                    <h3 class="fw-bold">Login to your Account</h3>
                     <p class="text-muted">Welcome back!</p>
                 </div>
 

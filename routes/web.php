@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;  // added admin control
 use App\Http\Controllers\Member\MemberDashboardController;  // added member controller to able to access it in web.php
 use App\Http\Controllers\Admin\ZoneController;
 use App\Http\Controllers\Member\ZoneController as MemberZoneController;
+use App\Http\Controllers\Admin\AnnouncementController;
 
 
 Route::get('/', function () {
@@ -31,6 +32,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::delete('/admin/zones/{zone}', [ZoneController::class, 'destroy'])->name('admin.zones.delete');  // route for deleting created zones
 
+    Route::get('/admin.announcements', [AnnouncementController::class, 'index'])->name('admin.announcements');
+
+    Route::post('/admin/announcements', [AnnouncementController::class, 'store'])->name('admin.announcements.store');
+
+    Route::put('/admin/announcements/{announcement}', [AnnouncementController::class, 'update'])->name('admin.announcements.update');
+
+    Route::delete('/admin/announcements/{announcement}', [AnnouncementController::class, 'destroy'])->name('admin.announcements.delete');
+
 });
 
 // Member routes
@@ -41,6 +50,8 @@ Route::middleware(['auth', 'role:member'])->group(function () {
     Route::get('/member/zones', [MemberZoneController::class, 'index'])->name('member.zones');
 
     Route::post('/member/zones/join', [MemberZoneController::class, 'join'])->name('member.zones.join');
+
+    Route::post('member/zones/leave', [MemberZoneController::class, 'leave'])->name('member.zones.leave');
 
 });
 

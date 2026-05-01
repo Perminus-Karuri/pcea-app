@@ -29,6 +29,9 @@
                     <li class="nav-item"><a class="nav-link" href="#">Announcements</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contributions</a></li>
                     <li class="nav-item mx-4">
+                        <a class="nav-link text-warning" href="{{ route('profile.edit') }}">Profile</a>
+                    </li>
+                    <li class="nav-item mx-4">
                         <a class="nav-link text-danger" href="{{ route('logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             Logout
@@ -45,8 +48,6 @@
 
     <div class="container py-4">
 
-        <!-- <h2 class="mb-4">My Zone</h2> -->
-
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -55,6 +56,7 @@
             </div>
         @endif
 
+        @if(!$member->zone_id)
         <div class="card shadow-sm mb-4">
             <div class="card-body">
                 <h5>Select Your Zone</h5>
@@ -86,7 +88,23 @@
             </div>
         </div>
 
+        @else
         <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h5>Current zone</h5>
+                <p>You are a member of <strong>{{ $member->zone->name }}</strong></p>
+
+                <form action="{{ route('member.zones.leave') }}" method="POST">
+                    @csrf
+
+                    <button type="submit" class="btn btn-danger">Leave zone</button>
+                </form>
+            </div>
+        </div>
+        @endif
+
+
+        <!-- <div class="card shadow-sm mb-4">
             <div class="card-body">
                 <h5>Current Zone</h5>
 
@@ -100,7 +118,7 @@
                     </p>
                 @endif
             </div>
-        </div>
+        </div> -->
 
         @if($member->zone)
             <div class="card shadow-sm">

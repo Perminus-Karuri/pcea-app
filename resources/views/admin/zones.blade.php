@@ -42,23 +42,23 @@
             </div>
 
             <ul class="nav flex-column px-3">
-                <li class="nav-item mx-4">
-                    <a class="nav-link" href="#">Members</a>
+                <li class="nav-item mb-2">
+                    <a class="nav-link" href="{{ route('admin.dashboard') }}">Members</a>
                 </li>
-                <li class="nav-item mx-4">
+                <li class="nav-item mb-2">
                     <a class="nav-link" href="#">Contributions</a>
                 </li>
-                <li class="nav-item mx-4">
+                <li class="nav-item mb-2">
                     <a class="nav-link" href="#">Announcements</a>
                 </li>
-                <li class="nav-item mx-4">
+                <li class="nav-item mb-2">
                     <a class="nav-link active" href="#">Zones</a>
                 </li>
-                <li class="nav-item mx-4">
+                <li class="nav-item mb-2">
                     <a class="nav-link" href="#">Groups</a>
                 </li>
 
-                <li class="nav-item mx-4">
+                <li class="nav-item mb-2">
                         <a class="nav-link text-danger" href="{{ route('logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             Logout
