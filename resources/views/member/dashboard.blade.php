@@ -77,25 +77,24 @@
 
     <div class="container-fluid p-5 bg-light text-black text-center" id="announcement">
         <h2>Announcements and Notices</h2>
-        <div class="bg-secondary p-3 rounded mb-3">
-            <h6 class="mb-2"><i>To All Members</i></h6>
-            <p class="mb-0">All members are invited...</p>
-        </div>
+        @forelse($announcements as $announcement)
+            <div class="card mb-3 shadow-sm">
+                <div class="card-body">
+                    <h4 class="text-muted">
+                        {{ $announcement->zone ? $announcement->zone->name . ' Zone' : 'All Members' }}
+                    </h4>
+                    
+                    <h6>{{ $announcement->title }}</h6>
 
-        <div class="bg-secondary p-3 rounded mb-3">
-            <h6 class="mb-2"><i>To All Members</i></h6>
-            <p class="mb-0">All members are invited...</p>
-        </div>
+                    <p>{!! nl2br(e($announcement->message)) !!}</p>
 
-        <div class="bg-secondary p-3 rounded mb-3">
-            <h6 class="mb-2"><i>To All Members</i></h6>
-            <p class="mb-0">All members are invited...</p>
-        </div>
+                    <small class="text-muted">{{ $announcement->created_at->format('d M Y') }}</small>
 
-        <div class="bg-secondary p-3 rounded mb-3">
-            <h6 class="mb-2"><i>To All Members</i></h6>
-            <p class="mb-0">All members are invited...</p>
-        </div>
+                </div>
+            </div>
+        @empty
+            <p class="text-muted">No announcements available.</p>
+        @endforelse
 
     </div>
 

@@ -64,34 +64,15 @@
 
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2>Dashboard</h2>
-                    <button class="btn btn-primary">+ Add Announcement</button>
                 </div>
 
                 <!-- STATS -->
-                <div class="row g-4 mb-4">
-                    <div class="col-md-4">
+                <div class="container g-4 mb-4">
+                    <div class="">
                         <div class="card shadow-sm border-0">
                             <div class="card-body">
-                                <h6 class="text-muted">Total Members</h6>
+                                <h6>Total Members</h6>
                                 <h3>{{ $totalMembers }}</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card shadow-sm border-0">
-                            <div class="card-body">
-                                <h6 class="text-muted">Total Contributions</h6>
-                                <h3>KES 50,000</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card shadow-sm border-0">
-                            <div class="card-body">
-                                <h6 class="text-muted">Active Groups</h6>
-                                <h3>8</h3>
                             </div>
                         </div>
                     </div>

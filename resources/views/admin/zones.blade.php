@@ -49,7 +49,10 @@
                     <a class="nav-link" href="#">Contributions</a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a class="nav-link" href="#">Announcements</a>
+                    <a class="nav-link text-white {{ request()->routeIs('admin.announcements') ? 'active' : '' }}"
+                        href="{{ route('admin.announcements') }}">
+                        Announcements
+                    </a>
                 </li>
                 <li class="nav-item mb-2">
                     <a class="nav-link active" href="#">Zones</a>

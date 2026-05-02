@@ -88,6 +88,19 @@
 
                         <div class="modal-body">
                             <div class="mb-3">
+                                <label class="form-label">Target Zone</label>
+                                <select name="zone_id" class="form-control">
+                                    <option value="">All Members</option>
+
+                                    @foreach($zones as $zone)
+                                        <option value="{{ $zone->id }}">
+                                            {{ $zone->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
                                 <label class="form-label">Title</label>
                                 <input name="title" class="form-control" type="text" placeholder="e.g. To All Members" required>
                             </div>
@@ -115,6 +128,11 @@
             <h3 class="mb-3">Posted Announcements</h3>
             @foreach($announcements as $announcement)
                 <div class="border rounded p-3 mb-3 bg-light">
+                    <small class="text-muted">
+                        Target:
+                        {{ $announcement->zone ? $announcement->zone->name . ' Zone' : 'All Members' }}
+                    </small>
+                    
                     <h6><i>{{ $announcement->title }}</i></h6>
 
                     <!-- multi-line message -->

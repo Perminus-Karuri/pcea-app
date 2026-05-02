@@ -5,13 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Announcement;
+use App\Models\Zone;
 
 class AnnouncementController extends Controller
 {
     public function index() {
-        $announcements = Announcement::with('user')->latest()->get();
+        $announcements = Announcement::with('user', 'zone')->latest()->get();
 
-        return view('admin.announcements', compact('announcements'));
+        $zones = Zone::latest()->get();
+
+        return view('admin.announcements', compact('announcements', 'zones'));
     }
 
     // storing announcements
@@ -27,6 +30,7 @@ class AnnouncementController extends Controller
             'title' => $request->title,
             'message' => $request->message,
             'user_id' => auth()->id(),
+            'zone_id' => $request->zone_id,
         ]);
 
         //redirect with a success message
@@ -37,11 +41,13 @@ class AnnouncementController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'message' => 'required|string',
+            'zone_id' => 'nullable|exists:zones,id',
         ]);
 
         $announcement->update([
             'title' => $request->title,
             'message' => $request->message,
+            'zone_id' => $request->zone_id,
         ]);
 
         return redirect()->route('admin.announcements')->with('success', 'Updated successfully');

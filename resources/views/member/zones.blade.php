@@ -103,23 +103,6 @@
         </div>
         @endif
 
-
-        <!-- <div class="card shadow-sm mb-4">
-            <div class="card-body">
-                <h5>Current Zone</h5>
-
-                @if($member->zone)
-                    <p class="mb-0">
-                        You belong to <strong>{{ $member->zone->name }}</strong> zone.
-                    </p>
-                @else
-                    <p class="text-muted mb-0">
-                        You have not joined any zone yet.
-                    </p>
-                @endif
-            </div>
-        </div> -->
-
         @if($member->zone)
             <div class="card shadow-sm">
                 <div class="card-body">
@@ -154,7 +137,26 @@
                     </table>
                 </div>
             </div>
-        @endif   
+        @endif  
+        
+        @if($member->zone)
+        <div class="card shadow-sm mt-4">
+            <div class="card-body">
+                <h5>{{$member->zone->name}} Zone Announcements</h5>
+
+                @forelse($zoneAnnouncements as $announcement)
+                <div class="border rounded p-3 mb-3">
+                    <h6>{{$announcement->title}}</h6>
+                    <p>{!! nl2br(e($announcement->message)) !!}</p>
+
+                    <p class="text-muted">{{$announcement->created_at->format('d M Y')}}</p>
+                </div>
+                @empty
+                <p class="text-muted">No announcement for your zone</p>
+                @endforelse
+            </div>
+        </div>
+        @endif
 
     </div>
 

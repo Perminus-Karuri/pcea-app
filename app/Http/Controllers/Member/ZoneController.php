@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Zone;
 use App\Models\User;
+use App\Models\Announcement;
 
 class ZoneController extends Controller
 {
@@ -17,19 +18,22 @@ class ZoneController extends Controller
 
         $zoneMembers = collect(); // empty collection for zone members
 
+        $zoneAnnouncements = collect();
+
         // gets other zone members if logged in member belongs to this zone
         if ($member->zone_id) {
-            $zoneMembers = User::where('role', 'member')
-                ->where('zone_id', $member->zone_id)
-                ->where('id', '!=', $member->id)
-                ->get();
+            $zoneMembers = User::where('role', 'member')->where('zone_id', $member->zone_id)
+                ->where('id', '!=', $member->id)->get();
+
+            $zoneAnnouncements = Announcement::where('zone_id', $member->zone_id)->latest()->get();    
         }
 
         // returns view with the required data
         return view('member.zones', compact(
             'zones',
             'member',
-            'zoneMembers'
+            'zoneMembers',
+            'zoneAnnouncements'
         ));
     }
 
