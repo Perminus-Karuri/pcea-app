@@ -102,7 +102,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Title</label>
-                                <input name="title" class="form-control" type="text" placeholder="e.g. To All Members" required>
+                                <input name="title" class="form-control" type="text" placeholder="e.g. District fellowship" required>
                             </div>
 
                             <div class="mb-3">
@@ -132,7 +132,7 @@
                         Target:
                         {{ $announcement->zone ? $announcement->zone->name . ' Zone' : 'All Members' }}
                     </small>
-                    
+
                     <h6><i>{{ $announcement->title }}</i></h6>
 
                     <!-- multi-line message -->

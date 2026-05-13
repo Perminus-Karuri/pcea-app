@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Zone;
+use App\Models\Group;
 
 class User extends Authenticatable
 {
@@ -50,9 +51,13 @@ class User extends Authenticatable
         ];
     }
 
-    // Relationship - a member belong to one zone
-    public function zone() 
-    {
+    // Relationship - a member belong to one zone(one-to-one relationship)
+    public function zone() {
         return $this->belongsTo(Zone::class);
+    }
+
+    // Relationship - a member belongs many groups(one-to-many relationship)
+    public function groups() {
+        return $this->belongsToMany(Group::class)->withTimestamps();
     }
 }

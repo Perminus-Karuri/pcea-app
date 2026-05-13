@@ -21,7 +21,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-4"><a class="nav-link" id="home" href="#">Home</a></li>
                     <li class="nav-item mx-4"><a class="nav-link" href="{{ route('member.zones') }}">Zones</a></li>
-                    <li class="nav-item mx-4"><a class="nav-link" href="#">Groups</a></li>
+                    <a class="nav-link active mx-4" href="{{ route('member.groups') }}">Groups</a>
                     <li class="nav-item mx-4"><a class="nav-link" href="#announcement">Announcements</a></li>
                     <li class="nav-item mx-4"><a class="nav-link" href="#">Contributions</a></li>
                     <li class="nav-item mx-4">

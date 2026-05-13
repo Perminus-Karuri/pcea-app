@@ -40,7 +40,10 @@
                         <a class="nav-link text-white" href="{{ route('admin.zones') }}">Zones</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a class="nav-link text-white" href="#">Groups</a>
+                        <a class="nav-link text-white {{ request()->routeIs('admin.groups') ? 'active' : '' }}"
+                        href="{{ route('admin.groups') }}">
+                        Groups
+                    </a>
                     </li>
                     <li class="nav-item mb-2">
                         <a class="nav-link text-warning" href="{{ route('profile.edit') }}">Profile</a>
@@ -71,8 +74,8 @@
                     <div class="">
                         <div class="card shadow-sm border-0">
                             <div class="card-body">
-                                <h6>Total Members</h6>
-                                <h3>{{ $totalMembers }}</h3>
+                                <h6 class="text-center">Total Members</h6>
+                                <h3 class="text-center">{{ $totalMembers }}</h3>
                             </div>
                         </div>
                     </div>

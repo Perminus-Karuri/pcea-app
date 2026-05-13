@@ -58,10 +58,7 @@
                     <a class="nav-link active" href="#">Zones</a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a class="nav-link text-white {{ request()->routeIs('admin.groups') ? 'active' : '' }}"
-                        href="{{ route('admin.groups') }}">
-                        Groups
-                    </a>
+                    <a class="nav-link" href="#">Groups</a>
                 </li>
 
                 <li class="nav-item mb-2">
@@ -85,22 +82,22 @@
                 <h2>Zones</h2>
             </div>
 
-            <!-- ADD ZONE -->
+            <!-- ADD GROUP -->
             <div class="card shadow-sm mb-4">
                 <div class="card-body">
-                    <h5 class="mb-3">Add New Zone</h5>
+                    <h5 class="mb-3">Add new group</h5>
 
-                    <form method="POST" action="{{ route('admin.zones.store') }}">
+                    <form method="POST" action="{{ route('admin.groups.store') }}">
                         @csrf
 
                         <div class="row g-2">
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="name" placeholder="Enter zone name" required>
+                                <input type="text" class="form-control" name="name" placeholder="Enter group name" required>
                             </div>
 
                             <div class="col-md-4">
                                 <button class="btn btn-warning w-100" type="submit">
-                                    Add Zone
+                                    Add Group
                                 </button>
                             </div>
                         </div>
@@ -109,31 +106,54 @@
                 </div>
             </div>
 
-            <!-- ZONES TABLE -->
+            <!-- GROUPS TABLE -->
             <div class="card shadow-sm">
                 <div class="card-body">
 
-                    <h5 class="mb-3">All Zones</h5>
+                    <h5 class="mb-3">All Groups</h5>
+
+                    <form method="GET" action="{{ route('admin.groups') }}" class="mb-4">
+                        <div class="row g-2">
+                            <div class="col-md-10">
+                                <select name="group_id" class="form-control">
+                                    <option value="">All Groups</option>
+
+                                    @foreach($groups as $group)
+                                        <option value="{{ $group->id }}"
+                                            {{ $selectedGroup == $group->id ? 'selected' : '' }}>
+                                            {{ $group->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-dark w-100">
+                                    Filter
+                                </button>
+                            </div>
+                        </div>
+                    </form>
 
                     <table class="table table-hover align-middle">
                         <thead class="table-light">
                             <tr>
                                 <th>#</th>
-                                <th>Zone Name</th>
-                                <th>Zone Members</th>
-                                <th class="text-end">Actions</th>
+                                <th>Group name</th>
+                                <th>Group members</th>
+                                <th class="text-end">Action</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            @foreach($zones as $zone)
+                            @foreach($groups as $group)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $zone->name }}</td>
-                                <td>{{ $zone->users_count }}</td>
+                                <td>{{ $group->name }}</td>
+                                <td>{{ $group->users_count }}</td>
                                 <td class="text-end">
                                 
-                                    <form action="{{ route('admin.zones.delete', $zone->id) }}" method="POST">
+                                    <form method="POST" action="{{ route('admin.groups.delete', $group->id) }}" onsubmit="return confirm('Are you sure you want to delete this group?')">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-sm btn-danger">Delete</button>
@@ -150,9 +170,34 @@
                 </div>
             </div>
 
-            <div class="card shadow-sm mb-4">
+            <div class="card shadow-sm mt-3">
                 <div class="card-body">
-                <h5 class="mb-3">Zone Members</h5>
+                <h5 class="mb-3">Group members</h5>
+
+                <form method="GET" action="{{ route('admin.groups') }}" class="mb-4">
+                    <div class="row g-2">
+                        <div class="col-md-10">
+                            <select name="group_id" class="form-control">
+                                <option value="">All Groups</option>
+
+                                @foreach($groups as $group)
+                                    <option value="{{ $group->id }}"
+                                        {{ $selectedGroup == $group->id ? 'selected' : '' }}>
+                                        {{ $group->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-dark w-100">
+                                Filter
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+
                 <div class="table-responsive">
                     <table class="table table-hover align-middle">
                     <thead>
@@ -168,7 +213,7 @@
                         <tr>
                             <td>{{ $member->name }}</td>
                             <td>{{ $member->phone }}</td>
-                            <td>{{ $member->zone?->name ?? 'No Zone '}}</td>
+                            <td>{{ $member->groups->pluck('name')->join(', ') ?: 'No Group' }}</td>
                             <td>{{ $member->email }}</td>
                         </tr>
                         @endforeach

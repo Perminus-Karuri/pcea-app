@@ -7,6 +7,8 @@ use App\Http\Controllers\Member\MemberDashboardController;  // added member cont
 use App\Http\Controllers\Admin\ZoneController;
 use App\Http\Controllers\Member\ZoneController as MemberZoneController;
 use App\Http\Controllers\Admin\AnnouncementController;
+use App\Http\Controllers\Admin\GroupController;
+use App\Http\Controllers\Member\GroupController as MemberGroupController;
 
 
 Route::get('/', function () {
@@ -40,6 +42,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::delete('/admin/announcements/{announcement}', [AnnouncementController::class, 'destroy'])->name('admin.announcements.delete');
 
+    Route::get('/admin/groups', [GroupController::class, 'index'])->name('admin.groups');
+
+    Route::post('admin/groups', [GroupController::class, 'store'])->name('admin.groups.store');
+
+    Route::delete('/admin/groups{group}', [GroupController::class, 'destroy'])->name('admin.groups.delete');
+
 });
 
 // Member routes
@@ -52,6 +60,12 @@ Route::middleware(['auth', 'role:member'])->group(function () {
     Route::post('/member/zones/join', [MemberZoneController::class, 'join'])->name('member.zones.join');
 
     Route::post('member/zones/leave', [MemberZoneController::class, 'leave'])->name('member.zones.leave');
+
+    Route::get('/member/groups', [MemberGroupController::class, 'index'])->name('member.groups');
+
+    Route::post('member/groups/join', [MemberGroupController::class, 'join'])->name('member.groups.join');
+
+    Route::post('/member/groups/{group}/leave', [MemberGroupController::class, 'leave'])->name('member.groups.leave');
 
 });
 

@@ -24,8 +24,9 @@
 
             <div class="collapse navbar-collapse" id="nav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Group/Zones</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('member.dashboard') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('member.zones') }}">Zones</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Groups</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Announcements</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contributions</a></li>
                     <li class="nav-item mx-4">
