@@ -1,46 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PCEA Chaka Church</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-dark">
+@extends('layout.member')
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-        <div class="container">
-            <a class="navbar-brand mx-4" href="#home">PCEA Chaka Church</a>
-
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="nav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item mx-4"><a class="nav-link" id="home" href="#">Home</a></li>
-                    <li class="nav-item mx-4"><a class="nav-link" href="{{ route('member.zones') }}">Zones</a></li>
-                    <a class="nav-link active mx-4" href="{{ route('member.groups') }}">Groups</a>
-                    <li class="nav-item mx-4"><a class="nav-link" href="#announcement">Announcements</a></li>
-                    <li class="nav-item mx-4"><a class="nav-link" href="#">Contributions</a></li>
-                    <li class="nav-item mx-4">
-                        <a class="nav-link text-warning" href="{{ route('profile.edit') }}">Profile</a>
-                    </li>
-                    <li class="nav-item mx-4">
-                        <a class="nav-link text-danger" href="{{ route('logout') }}"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            Logout
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+@section('content')
 
     <div class="container-fluid p-5 bg-dark text-white text-center">
         <h2 class="p-5">Welcome to <span class="text-warning">PCEA CHAKA CHURCH</span></h2>
@@ -121,7 +81,4 @@
         <small>Serving God, Serving people.</small>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
+@endsection

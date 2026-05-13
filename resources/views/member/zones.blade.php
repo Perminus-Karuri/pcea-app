@@ -1,63 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Groups & Zones</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body { overflow-x: hidden; }
-    .sidebar { height: 100vh; }
-    .sidebar .nav-link { color: #adb5bd; }
-    .sidebar .nav-link.active, .sidebar .nav-link:hover { color: #fff; background: rgba(255,255,255,0.1); border-radius: 8px; }
-  </style>
-</head>
-<body>
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-        <div class="container">
-            <a class="navbar-brand" href="#">PCEA Chaka Church</a>
+@extends('layout.member')
 
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
-            <span class="navbar-toggler-icon"></span>
-            </button>
+@section('content')
 
-            <div class="collapse navbar-collapse" id="nav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('member.dashboard') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('member.zones') }}">Zones</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Groups</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Announcements</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contributions</a></li>
-                    <li class="nav-item mx-4">
-                        <a class="nav-link text-warning" href="{{ route('profile.edit') }}">Profile</a>
-                    </li>
-                    <li class="nav-item mx-4">
-                        <a class="nav-link text-danger" href="{{ route('logout') }}"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            Logout
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container py-4">
-
-        @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        @endif
-
-        @if(!$member->zone_id)
+    @if(!$member->zone_id)
         <div class="card shadow-sm mb-4">
             <div class="card-body">
                 <h5>Select Your Zone</h5>
@@ -102,9 +47,9 @@
                 </form>
             </div>
         </div>
-        @endif
+    @endif
 
-        @if($member->zone)
+    @if($member->zone)
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h5 class="mb-3">Other Members in {{ $member->zone->name }}</h5>
@@ -138,9 +83,9 @@
                     </table>
                 </div>
             </div>
-        @endif  
+    @endif  
         
-        @if($member->zone)
+    @if($member->zone)
         <div class="card shadow-sm mt-4">
             <div class="card-body">
                 <h5>{{$member->zone->name}} Zone Announcements</h5>
@@ -157,11 +102,6 @@
                 @endforelse
             </div>
         </div>
-        @endif
+    @endif
 
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
+@endsection
