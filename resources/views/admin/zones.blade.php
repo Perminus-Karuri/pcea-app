@@ -1,84 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zones - Admin Panel</title>
+@extends('layouts.admin')
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+@section('content')
 
-    <style>
-        body {
-            overflow-x: hidden;
-            background-color: #f8f9fa;
-        }
-
-        .sidebar {
-            height: 100vh;
-        }
-
-        .sidebar .nav-link {
-            color: #adb5bd;
-        }
-
-        .sidebar .nav-link.active,
-        .sidebar .nav-link:hover {
-            color: #fff;
-            background: rgba(255,255,255,0.1);
-            border-radius: 8px;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container-fluid">
-    <div class="row">
-
-        <!-- SIDEBAR -->
-        <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar py-4">
-            <div class="text-center text-white mb-4">
-                <h5>PCEA CHAKA</h5>
-                <small>Admin Panel</small>
-            </div>
-
-            <ul class="nav flex-column px-3">
-                <li class="nav-item mb-2">
-                    <a class="nav-link" href="{{ route('admin.dashboard') }}">Members</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a class="nav-link" href="#">Contributions</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a class="nav-link text-white {{ request()->routeIs('admin.announcements') ? 'active' : '' }}"
-                        href="{{ route('admin.announcements') }}">
-                        Announcements
-                    </a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a class="nav-link active" href="#">Zones</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a class="nav-link text-white {{ request()->routeIs('admin.groups') ? 'active' : '' }}"
-                        href="{{ route('admin.groups') }}">
-                        Groups
-                    </a>
-                </li>
-
-                <li class="nav-item mb-2">
-                        <a class="nav-link text-danger" href="{{ route('logout') }}"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            Logout
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                </li>
-            </ul>
-        </nav>
-
-        <!-- MAIN CONTENT -->
-        <main class="col-md-9 col-lg-10 px-md-4 py-4">
+    <!-- MAIN CONTENT -->
+    <main class="col-md-9 col-lg-10 px-md-4 py-4">
 
             <!-- PAGE TITLE -->
             <div class="d-flex justify-content-between align-items-center mb-4">
@@ -178,12 +103,5 @@
                 </div>
             </div>
 
-        </main>
-
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
+    </main>
+@endsection
