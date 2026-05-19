@@ -9,6 +9,12 @@
                 <li class="nav-item mb-2">
                     <a class="nav-link" href="{{ route('admin.dashboard') }}">Members</a>
                 </li>
+                <li>
+                    <a class="nav-link {{ request()->routeIs('admin.contribution-types') ? 'active' : '' }}"
+                        href="{{ route('admin.contribution-types') }}">
+                            Contribution Types
+                    </a>
+                </li>
                 <li class="nav-item mb-2">
                     <a class="nav-link" href="#">Contributions</a>
                 </li>

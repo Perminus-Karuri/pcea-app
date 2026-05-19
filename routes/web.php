@@ -9,6 +9,7 @@ use App\Http\Controllers\Member\ZoneController as MemberZoneController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Member\GroupController as MemberGroupController;
+use App\Http\Controllers\Admin\ContributionTypeController;
 
 
 Route::get('/', function () {
@@ -47,6 +48,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('admin/groups', [GroupController::class, 'store'])->name('admin.groups.store');
 
     Route::delete('/admin/groups{group}', [GroupController::class, 'destroy'])->name('admin.groups.delete');
+
+    Route::get('/admin/contribution-types', [ContributionTypeController::class, 'index'])->name('admin.contribution-types');
+
+    Route::post('/admin/contribution-types', [ContributionTypeController::class, 'store'])->name('admin.contribution-types.store');
+
+    Route::delete('/admin/contribution-types/{contributionType}', [ContributionTypeController::class, 'destroy'])->name('admin.contribution-types.delete');
 
 });
 
