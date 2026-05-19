@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Zone;
 use App\Models\Group;
+use App\Models\Contribution;
 
 class User extends Authenticatable
 {
@@ -59,5 +60,10 @@ class User extends Authenticatable
     // Relationship - a member belongs many groups(one-to-many relationship)
     public function groups() {
         return $this->belongsToMany(Group::class)->withTimestamps();
+    }
+
+    // Relationship - a member can have many/multiple contributions
+    public function contributions() {
+        return $this->hasMany(Contribution::class);
     }
 }

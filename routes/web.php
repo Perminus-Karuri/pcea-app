@@ -10,7 +10,8 @@ use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Member\GroupController as MemberGroupController;
 use App\Http\Controllers\Admin\ContributionTypeController;
-
+use App\Http\Controllers\Admin\ContributionController;
+use App\Http\Controllers\Member\ContributionController as MemberContributionController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -55,6 +56,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::delete('/admin/contribution-types/{contributionType}', [ContributionTypeController::class, 'destroy'])->name('admin.contribution-types.delete');
 
+    Route::get('/admin/contributions', [ContributionController::class, 'index'])->name('admin.contributions');
+
 });
 
 // Member routes
@@ -73,6 +76,10 @@ Route::middleware(['auth', 'role:member'])->group(function () {
     Route::post('member/groups/join', [MemberGroupController::class, 'join'])->name('member.groups.join');
 
     Route::post('/member/groups/{group}/leave', [MemberGroupController::class, 'leave'])->name('member.groups.leave');
+
+    Route::get('/member/contributions', [MemberContributionController::class, 'index'])->name('member.contributions');
+
+    Route::post('/member/contributions', [MemberContributionController::class, 'store'])->name('member.contributions.store');
 
 });
 

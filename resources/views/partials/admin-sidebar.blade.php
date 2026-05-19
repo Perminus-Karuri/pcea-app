@@ -16,7 +16,7 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a class="nav-link" href="#">Contributions</a>
+                    <a class="nav-link" href="{{ route('admin.contributions') }}">Contributions</a>
                 </li>
                 <li class="nav-item mb-2">
                     <a class="nav-link {{ request()->routeIs('admin.announcements') ? 'active' : '' }}"

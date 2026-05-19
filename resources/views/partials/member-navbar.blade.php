@@ -23,7 +23,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contributions</a>
+                    <a class="nav-link" href="{{ route('member.contributions') }}">Contributions</a>
                 </li>
 
                 <li class="nav-item">
