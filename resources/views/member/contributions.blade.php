@@ -26,21 +26,12 @@
 
             <div class="mb-3">
                 <label class="form-label">Phone Number</label>
-                <input type="text"
-                       name="phone"
-                       class="form-control"
-                       placeholder="2547XXXXXXXX"
-                       required>
+                <input type="text"  name="phone" class="form-control" placeholder="07XXXXXXXX" required>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Amount</label>
-                <input type="number"
-                       name="amount"
-                       class="form-control"
-                       placeholder="Enter amount"
-                       min="1"
-                       required>
+                <input type="number" name="amount" class="form-control" placeholder="Enter amount" min="1" required>
             </div>
 
             <button type="submit" class="btn btn-success">
@@ -73,11 +64,7 @@
                         <td>{{ $contribution->contributionType->name }}</td>
                         <td>{{ $contribution->phone }}</td>
                         <td>KES {{ number_format($contribution->amount, 2) }}</td>
-                        <td>
-                            <span class="badge bg-secondary">
-                                {{ ucfirst($contribution->status) }}
-                            </span>
-                        </td>
+                        <td>{{ ucfirst($contribution->status) }}</td>
                         <td>{{ $contribution->created_at->format('d M Y') }}</td>
                     </tr>
                 @empty
