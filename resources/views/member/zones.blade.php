@@ -65,20 +65,14 @@
                         </thead>
 
                         <tbody>
-                            @forelse($zoneMembers as $zoneMember)
+                            @foreach($zoneMembers as $zoneMember)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $zoneMember->name }}</td>
                                     <!-- <td>{{ $zoneMember->phone }}</td>
                                     <td>{{ $zoneMember->email }}</td> -->
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="3" class="text-center text-muted">
-                                        No other members in this zone yet
-                                    </td>
-                                </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

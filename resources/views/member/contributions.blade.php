@@ -64,7 +64,17 @@
                         <td>{{ $contribution->contributionType->name }}</td>
                         <td>{{ $contribution->phone }}</td>
                         <td>KES {{ number_format($contribution->amount, 2) }}</td>
-                        <td>{{ ucfirst($contribution->status) }}</td>
+                        <td>
+                            @if($contribution->status == 'successful')
+                                <span class="text-success">Successful</span>
+
+                            @elseif($contribution->status == 'failed')
+                                <span class="text-danger">Failed</span>
+
+                            @else
+                                <span class="text-warning">Pending</span>
+                            @endif
+                            </td>
                         <td>{{ $contribution->created_at->format('d M Y') }}</td>
                     </tr>
                 @empty
