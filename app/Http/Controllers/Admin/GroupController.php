@@ -9,6 +9,7 @@ use App\Models\User;
 
 class GroupController extends Controller
 {
+    // Function to display all the groups
     public function index(Request $request) {
         $selectedGroup = $request->group_id;
 
@@ -24,6 +25,7 @@ class GroupController extends Controller
         return view('admin.groups', compact('groups', 'members', 'selectedGroup'));
     }
 
+    // Function to create a new group
     public function store(Request $request) {
         $request->validate([
             'name' => 'required|string|max:255|unique:groups,name'
@@ -36,6 +38,7 @@ class GroupController extends Controller
         return redirect()->route('admin.groups')->with('success', 'The group was successfully created');
     }
 
+    // Function to delete a group
     public function destroy(Group $group) {
         $group->delete();
 

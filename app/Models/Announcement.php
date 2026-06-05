@@ -15,10 +15,12 @@ class Announcement extends Model
         'zone_id',
     ];
 
+    // one-to-many relationship
     public function user() {
         return $this->belongsTo(User::class);
     }
 
+    // one-to-many relationship - announcement belong to a specific zone
     public function zone() {
         return $this->belongsTo(Zone::class);
     }

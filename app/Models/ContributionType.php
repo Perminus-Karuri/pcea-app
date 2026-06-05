@@ -11,7 +11,7 @@ class ContributionType extends Model
         'name',
     ];
 
-    // Relationship - a contribution type can have many contribution entries
+    // one-to-many relationship - a contribution type can have many contribution entries
     public function contributions() {
         return $this->hasMany(Contribution::class);
     }

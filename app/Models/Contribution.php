@@ -20,12 +20,12 @@ class Contribution extends Model
 
     ];
 
-    // Relationship - one contribution belongs to one user
+    // one-to-one relationship - one contribution belongs to one user
     public function user() {
         return $this->belongsTo(User::class);
     }
 
-    // Relationship - a contribution belongs to one contribution type
+    // one-to-one relationship - a contribution belongs to one contribution type
     public function contributionType() {
         return $this->belongsTo(ContributionType::class);
     }

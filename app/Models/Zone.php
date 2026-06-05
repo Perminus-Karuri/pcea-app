@@ -11,6 +11,7 @@ class Zone extends Model
         'name',
     ];
     
+    // one-to-many relationship - one zone has many members (members belong to one zone)
     public function users()
     {
         return $this->hasMany(User::class);

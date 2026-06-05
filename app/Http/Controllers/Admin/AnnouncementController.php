@@ -9,8 +9,9 @@ use App\Models\Zone;
 
 class AnnouncementController extends Controller
 {
+    // Function to display all announcements
     public function index() {
-        $announcements = Announcement::with('user', 'zone')->latest()->get();
+        $announcements = Announcement::with('user', 'zone')->latest()->get(); // get annoucements and order them by newest first
 
         $zones = Zone::latest()->get();
 
@@ -37,6 +38,7 @@ class AnnouncementController extends Controller
         return redirect()->route('admin.announcements')->with('success', 'Announcement posted successfully');
     }
 
+    // Function for editing a posted announcement
     public function update(Request $request, Announcement $announcement) {
         $request->validate([
             'title' => 'required|string|max:255',
@@ -50,9 +52,10 @@ class AnnouncementController extends Controller
             'zone_id' => $request->zone_id,
         ]);
 
-        return redirect()->route('admin.announcements')->with('success', 'Updated successfully');
+        return redirect()->route('admin.announcements')->with('success', 'Updated successfully'); // redirect to announcement page with success message
     }
 
+    // Function for deleting a posted announcement
     public function destroy(Announcement $announcement) {
         $announcement->delete();
 

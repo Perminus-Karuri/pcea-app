@@ -17,19 +17,22 @@ class ContributionController extends Controller
         $this->mpesa = $mpesa;
     }
 
+    // function to display contributions page 
     public function index() {
         $types = ContributionType::latest()->get();
 
+        // fetch contribution history that belongs to the logged in member, orders them by the newest
         $contributions = Contribution::with('contributionType')->where('user_id', auth()->id())
             ->latest()->get();
 
         return view('member.contributions', compact('types', 'contributions'));
     }
 
+    // function to store member contribution 
     public function store(Request $request) {
         $request->validate([
             'contribution_type_id' => ['required','exists:contribution_types,id'],
-            'phone' => ['required', 'regex:/^(07|01)[0-9]{8}$/'],
+            'phone' => ['required', 'regex:/^(07|01)[0-9]{8}$/'], // validate that the phone number starts either with 07 or 01 followwed by 8 digits
             'amount' => ['required', 'numeric', 'min:1']
         ]);
 
@@ -41,7 +44,7 @@ class ContributionController extends Controller
             $phone = "254".substr($phone, 1);
         }
 
-        // creating a pending contribution
+        // creating a contribution with a pending status
         $contribution = Contribution::create([
             'user_id' => auth()->id(),
             'contribution_type_id' => $request->contribution_type_id,
@@ -63,13 +66,13 @@ class ContributionController extends Controller
 
         Log::info('MPESA STK Response: ', $response);
 
-        // save checkout id
+        // save checkoutRequest id for callback verification
         if(isset($response['CheckoutRequestID'])) {
             $contribution->update([
                 'checkout_request_id' => $response['CheckoutRequestID'],
             ]);
 
-            return redirect()->route('member.contributions')->with('success', 'Mpesa prompt sent to your phone');
+            return redirect()->route('member.contributions')->with('success', 'Mpesa prompt sent to your phone'); // Redirect back with a success message after the STK push request is accepted
         }
 
         return redirect()->back()->with('error', 'Mpesa payment initiation failed!');
