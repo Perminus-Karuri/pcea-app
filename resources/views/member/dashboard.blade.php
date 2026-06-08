@@ -41,7 +41,13 @@
             <div class="card mb-3 shadow-sm">
                 <div class="card-body">
                     <h4 class="text-muted">
-                        {{ $announcement->zone ? $announcement->zone->name . ' Zone' : 'All Members' }}
+                        @if($announcement->zone)
+                            {{$announcement->zone->name }} zone
+                        @elseif($announcement->group)
+                            {{$announcement->group->name}} group
+                        @else
+                            All members
+                        @endif
                     </h4>
                     
                     <h6>{{ $announcement->title }}</h6>

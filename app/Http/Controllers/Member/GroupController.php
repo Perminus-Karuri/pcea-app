@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Group; // import group model
 use App\Models\User; // import user model
+use App\Models\Announcement; // import announcement model
 
 class GroupController extends Controller
 {
@@ -13,9 +14,11 @@ class GroupController extends Controller
     public function index() {
         $groups = Group::latest()->get(); // get the groups and order them by newest
 
-        $member = auth()->user()->load('groups');
+        $announcements = Announcement::latest()->get();
 
-        return view('member.groups', compact('groups', 'member'));
+        $member = auth()->user()->load('groups', 'groups.users', 'groups.announcements');
+
+        return view('member.groups', compact('groups', 'member', 'announcements'));
     }
 
     // Function to allow members to join groups 

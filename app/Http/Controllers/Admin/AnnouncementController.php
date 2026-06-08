@@ -4,18 +4,22 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
+// import models
 use App\Models\Announcement;
 use App\Models\Zone;
+use App\Models\Group;
 
 class AnnouncementController extends Controller
 {
     // Function to display all announcements
     public function index() {
-        $announcements = Announcement::with('user', 'zone')->latest()->get(); // get annoucements and order them by newest first
+        $announcements = Announcement::with('user', 'zone', 'group')->latest()->get(); // get annoucements and order them by newest first
 
         $zones = Zone::latest()->get();
+        $groups = Group::latest()->get();
 
-        return view('admin.announcements', compact('announcements', 'zones'));
+        return view('admin.announcements', compact('announcements', 'zones', 'groups'));
     }
 
     // storing announcements
@@ -24,7 +28,14 @@ class AnnouncementController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'message' => 'required|string',
+            'zone_id' => 'nullable|exists:zones,id',
+            'group_id' => 'nullable|exists:groups,id',
         ]);
+
+        if ($request->zone_id && $request->group_id) {
+            return back()->withErrors(['group_id' => 'Choose either a zone or a group, not both.'
+            ]);
+        }
 
         // creating the announcement and storing it
         Announcement::create([
@@ -32,6 +43,7 @@ class AnnouncementController extends Controller
             'message' => $request->message,
             'user_id' => auth()->id(),
             'zone_id' => $request->zone_id,
+            'group_id' => $request->group_id,
         ]);
 
         //redirect with a success message

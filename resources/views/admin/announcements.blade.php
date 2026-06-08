@@ -35,11 +35,26 @@
                             <div class="mb-3">
                                 <label class="form-label">Target Zone</label>
                                 <select name="zone_id" class="form-control">
-                                    <option value="">All Members</option>
+                                    <option value="">No zone</option>
 
                                     @foreach($zones as $zone)
                                         <option value="{{ $zone->id }}">
                                             {{ $zone->name }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Target Group</label>
+
+                                <select name="group_id" class="form-control">
+                                    <option value="">No group</option>
+
+                                    @foreach($groups as $group)
+                                        <option value="{{ $group->id }}">
+                                            {{ $group->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -73,9 +88,15 @@
             <h3 class="mb-3">Posted Announcements</h3>
             @foreach($announcements as $announcement)
                 <div class="border rounded p-3 mb-3 bg-light">
-                    <small class="text-muted">
-                        Target:
-                        {{ $announcement->zone ? $announcement->zone->name . ' Zone' : 'All Members' }}
+                    <small class="text">
+                        To:
+                        @if($announcement->zone)
+                            {{$announcement->zone->name }} zone
+                        @elseif($announcement->group)
+                            {{$announcement->group->name}} group
+                        @else
+                            All members
+                        @endif
                     </small>
 
                     <h6><i>{{ $announcement->title }}</i></h6>
@@ -105,7 +126,7 @@
                     </div>
                 </div>
 
-                <!-- Edit Modal -->
+                <!-- Edit Modal: to edit existing announcement -->
                 <div class="modal fade" id="editModal{{ $announcement->id }}" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">

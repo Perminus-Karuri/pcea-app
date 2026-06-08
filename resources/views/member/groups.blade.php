@@ -74,6 +74,35 @@
                     </form>
                 </div>
 
+                <!-- GROUP ANNOUNCEMENTS -->
+                <div class="mt-4">
+
+                    <h6>{{ $group->name }} Announcements</h6>
+
+                    @forelse($group->announcements as $announcement)
+
+                        <div class="border rounded p-3 mb-3">
+
+                            <h6>{{ $announcement->title }}</h6>
+
+                            <p>{!! nl2br(e($announcement->message)) !!}</p>
+
+                            <small class="text-muted">
+                                {{ $announcement->created_at->format('d M Y') }}
+                            </small>
+
+                        </div>
+
+                    @empty
+
+                        <p class="text-muted">
+                            No announcements for this group yet.
+                        </p>
+
+                    @endforelse
+
+                </div>
+
                 <!-- GROUP MEMBERS -->
                 <div>
                     <h6 class="mb-3">Group Members</h6>
@@ -115,5 +144,24 @@
         </div>
 
     @endforelse
+
+    @if($member->group)
+        <div class="card shadow-sm mt-4">
+            <div class="card-body">
+                <h5>{{$member->group->name}} Announcements</h5>
+
+                @forelse($group->Announcements as $announcement)
+                <div class="border rounded p-3 mb-3">
+                    <h6>{{$announcement->title}}</h6>
+                    <p>{!! nl2br(e($announcement->message)) !!}</p>
+
+                    <p class="text-muted">{{$announcement->created_at->format('d M Y')}}</p>
+                </div>
+                @empty
+                <p class="text-muted">No announcement for your group</p>
+                @endforelse
+            </div>
+        </div>
+    @endif
 
 @endsection
