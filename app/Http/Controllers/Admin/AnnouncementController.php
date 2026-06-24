@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-// import models
+// import announcement, zone and group models
 use App\Models\Announcement;
 use App\Models\Zone;
 use App\Models\Group;

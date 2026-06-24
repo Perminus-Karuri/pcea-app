@@ -6,7 +6,7 @@
 
         <!-- PAGE TITLE -->
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Zones</h2>
+            <h2>Groups</h2>
         </div>
 
         <!-- ADD GROUP -->
@@ -129,6 +129,7 @@
                     <table class="table table-hover align-middle">
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>Name</th>
                             <th>Phone no.</th>
                             <th>Zone</th>
@@ -138,6 +139,7 @@
                     <tbody>
                         @foreach($members as $member)
                         <tr>
+                            <td>{{ $loop-> iteration}}</td>
                             <td>{{ $member->name }}</td>
                             <td>{{ $member->phone }}</td>
                             <td>{{ $member->groups->pluck('name')->join(', ') ?: 'No Group' }}</td>

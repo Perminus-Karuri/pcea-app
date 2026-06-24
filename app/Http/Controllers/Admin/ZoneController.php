@@ -4,18 +4,29 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
+// import zone and user models
 use App\Models\Zone;
 use App\Models\User;
 
 class ZoneController extends Controller
 {
     // displays zones page
-    public function index() {
+    public function index(Request $request) {
+        $selectedZone = $request->zone_id;
+
         $zones = Zone::withCount('users')->get();  // get all zones and count users/members in each zone
 
         $members = User::with('zone')->get();  // get all users and their zone relationship
 
-        return view('admin.zones', compact('zones', 'members'));  // return admin zone view with retrieved data
+        $members = User::where('role', 'member')->with('zone')
+            ->when($selectedZone, function ($query) use ($selectedZone) {
+            $query->whereHas('zone', function ($q) use ($selectedZone) {
+                $q->where('zones.id', $selectedZone);
+            });
+        })->get();
+
+        return view('admin.zones', compact('zones', 'members', 'selectedZone'));  // return admin zone view with retrieved data
     }
 
     // storing new zones

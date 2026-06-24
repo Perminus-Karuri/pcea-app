@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
+// import zone, user and announcement models
 use App\Models\Zone;
 use App\Models\User;
 use App\Models\Announcement;

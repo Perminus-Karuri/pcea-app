@@ -78,10 +78,35 @@
             <div class="card shadow-sm mb-4">
                 <div class="card-body">
                 <h5 class="mb-3">Zone Members</h5>
+
+                <form method="GET" action="{{ route('admin.zones') }}" class="mb-4">
+                    <div class="row g-2">
+                        <div class="col-md-10">
+                            <select name="zone_id" class="form-control">
+                                <option value="">All Zones</option>
+
+                                @foreach($zones as $zone)
+                                    <option value="{{ $zone->id }}"
+                                        {{ $selectedZone == $zone->id ? 'selected' : '' }}>
+                                        {{ $zone->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-dark w-100">
+                                Filter
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
                 <div class="table-responsive">
                     <table class="table table-hover align-middle">
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>Name</th>
                             <th>Phone no.</th>
                             <th>Zone</th>
@@ -90,12 +115,13 @@
                     </thead>
                     <tbody>
                         @foreach($members as $member)
-                        <tr>
-                            <td>{{ $member->name }}</td>
-                            <td>{{ $member->phone }}</td>
-                            <td>{{ $member->zone?->name ?? 'No Zone '}}</td>
-                            <td>{{ $member->email }}</td>
-                        </tr>
+                            <tr>
+                                <td>{{ $loop->iteration}}</td>
+                                <td>{{ $member->name }}</td>
+                                <td>{{ $member->phone }}</td>
+                                <td>{{ $member->zone?->name ?? 'No Zone '}}</td>
+                                <td>{{ $member->email }}</td>
+                            </tr>
                         @endforeach
                     </tbody>
                     </table>

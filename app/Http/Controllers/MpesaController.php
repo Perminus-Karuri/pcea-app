@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+
+// import contribution model
 use App\Models\Contribution;
 
 class MpesaController extends Controller

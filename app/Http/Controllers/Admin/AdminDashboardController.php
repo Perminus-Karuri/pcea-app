@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
+// import user model
 use App\Models\User;
 
 class AdminDashboardController extends Controller
