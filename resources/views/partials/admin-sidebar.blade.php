@@ -25,10 +25,10 @@
                     </a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a class="nav-link" href="{{ route('admin.zones') ? 'active' : '' }}">Zones</a>
+                    <a class="nav-link" href="{{ route('admin.zones') }}">Zones</a>
                 </li>
                 <li class="nav-item mb-2">
-                    <a class="nav-link" href="{{ route('admin.groups') 'active' : '' }}">Groups</a>
+                    <a class="nav-link" href="{{ route('admin.groups') }}">Groups</a>
                 </li>
                 <li class="nav-item mb-2">
                     <a class="nav-link text-warning" href="{{ route('profile.edit') }}">Profile</a>

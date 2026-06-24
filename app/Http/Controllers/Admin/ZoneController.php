@@ -17,14 +17,15 @@ class ZoneController extends Controller
 
         $zones = Zone::withCount('users')->get();  // get all zones and count users/members in each zone
 
-        $members = User::with('zone')->get();  // get all users and their zone relationship
-
+        // get all users and their zone relationship
         $members = User::where('role', 'member')->with('zone')
-            ->when($selectedZone, function ($query) use ($selectedZone) {
-            $query->whereHas('zone', function ($q) use ($selectedZone) {
-                $q->where('zones.id', $selectedZone);
-            });
-        })->get();
+            ->when($selectedZone === 'no-zone', function ($query) {
+            $query->whereNull('zone_id');
+        })
+        ->when($selectedZone && $selectedZone !== 'no-zone', function ($query) use ($selectedZone) {
+            $query->where('zone_id', $selectedZone);
+        })
+        ->get();
 
         return view('admin.zones', compact('zones', 'members', 'selectedZone'));  // return admin zone view with retrieved data
     }

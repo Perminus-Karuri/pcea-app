@@ -84,6 +84,7 @@
                         <div class="col-md-10">
                             <select name="zone_id" class="form-control">
                                 <option value="">All Zones</option>
+                                <option value="no-zone">No zone</option>
 
                                 @foreach($zones as $zone)
                                     <option value="{{ $zone->id }}"

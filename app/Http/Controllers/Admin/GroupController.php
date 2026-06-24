@@ -18,7 +18,13 @@ class GroupController extends Controller
         $groups = Group::withCount('users')->latest()->get();
 
         $members = User::where('role', 'member')->with('groups')
-            ->when($selectedGroup, function ($query) use ($selectedGroup) {
+            // members without a group
+            ->when($selectedGroup === 'no-group', function ($query) {
+                $query->doesntHave('groups');
+            })
+            
+            // members with a group
+            ->when($selectedGroup && $selectedGroup !== 'no-group', function ($query) use ($selectedGroup) {
             $query->whereHas('groups', function ($q) use ($selectedGroup) {
                 $q->where('groups.id', $selectedGroup);
             });

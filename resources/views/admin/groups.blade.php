@@ -106,6 +106,7 @@
                         <div class="col-md-10">
                             <select name="group_id" class="form-control">
                                 <option value="">All Groups</option>
+                                <option value="no-group">No group</option>
 
                                 @foreach($groups as $group)
                                     <option value="{{ $group->id }}"
