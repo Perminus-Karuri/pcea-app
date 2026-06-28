@@ -20,11 +20,24 @@ class ContributionController extends Controller
     }
 
     // function to display contributions page 
-    public function index() {
+    public function index(Request $request) {
         $types = ContributionType::latest()->get();
 
         // fetch contribution history that belongs to the logged in member, orders them by the newest
-        $contributions = Contribution::with('contributionType')->where('user_id', auth()->id())
+        $contributions = Contribution::with('contributionType')
+            ->where('user_id', auth()->id())
+            ->when($request->filled('type'), function ($query) use ($request) {
+                $query->where('contribution_type_id', $request->type);
+            })
+            ->when($request->filled('status'), function ($query) use ($request) {
+                $query->where('status', $request->status);
+            }) // filter by status
+            ->when($request->filled('from_date'), function ($query) use ($request) {
+                $query->whereDate('created_at', '>=', $request->from_date);
+            }) // filter by start date
+            ->when($request->filled('to_date'), function ($query) use ($request) {
+                $query->whereDate('created_at', '<=', $request->to_date);
+            }) // filter by end date
             ->latest()->get();
 
         return view('member.contributions', compact('types', 'contributions'));

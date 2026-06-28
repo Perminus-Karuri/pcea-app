@@ -28,7 +28,6 @@ class ContributionController extends Controller
         
         $contributions = $query->latest()->get(); // get contributions and order them from latest to oldest
 
-
         // calculates total successful contributions
         $totalAmount = $contributions->where('status', 'successful')->sum('amount');
 
@@ -40,6 +39,6 @@ class ContributionController extends Controller
             'types',
             'totalAmount',
             'totalFailedAmount'
-        )); // returns view of all contributions, types and total amount
+        )); // returns view of all contributions, types, total amount and total failed amount
     }
 }

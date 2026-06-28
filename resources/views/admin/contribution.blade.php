@@ -47,10 +47,17 @@
                         <input type="date" name="to_date" id="to_date" class="form-control" placeholder="To date" value="{{ request('to_date') }}">
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                         <label for="filter" class="form-label">&nbsp;</label>
                         <button class="btn btn-warning w-100">
                             Filter
+                        </button>
+                    </div>
+
+                    <div class="col-md-1">
+                        <label for="reset" class="form-label">&nbsp;</label>
+                        <button href="{{ route('admin.contributions') }}" class="btn btn-secondary">
+                            Reset
                         </button>
                     </div>
                 </div>
