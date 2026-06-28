@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
+// import models
 use App\Models\User;
 use App\Models\Zone;
-use App\Models\Groups;
+use App\Models\Group;
 
 class Announcement extends Model
 {
@@ -17,17 +19,17 @@ class Announcement extends Model
         'group_id',
     ];
 
-    // one-to-many relationship
+    // Many-to-one relationship: this announcement belongs to a user
     public function user() {
         return $this->belongsTo(User::class);
     }
 
-    // one-to-many relationship - announcement belong to a specific zone
+    // Many-to-one relationship: this announcement belongs to a zone
     public function zone() {
         return $this->belongsTo(Zone::class);
     }
 
-    // one-to-many relationship - announcement belongs to a specific group
+    // Many-to-one relationship: this announcement belongs to a group
     public function group() {
         return $this->belongsTo(Group::class);
     }

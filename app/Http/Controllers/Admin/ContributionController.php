@@ -15,36 +15,31 @@ class ContributionController extends Controller
         // get contribution types and order them from latest to oldest
         $types = ContributionType::latest()->get();
 
-        // retrieve contributions made
-        $contributions = Contribution::with(['user', 'contributionType'])
-            ->when($request->type, function ($query) use ($request) {
-                $query->where('contribution_type_id', $request->type); // filter by contribution type
-            })->when($request->month, function ($query) use ($request) {
-                $query->whereMonth('created_at', $request->month); // filter by month
-            })->when($request->year, function ($query) use ($request) {
-                $query->whereYear('created_at', $request->year); // filter by year
-            })
-        ->latest()->get(); // show newest contribution first
+        $query = Contribution::with(['user', 'contributionType'])
+        ->when($request->filled('type'), function ($query) use ($request) {
+            $query->where('contribution_type_id', $request->type);
+        })
+        ->when($request->filled('from_date'), function ($query) use ($request) {
+            $query->whereDate('created_at', '>=', $request->from_date);
+        }) // filter by start date
+        ->when($request->filled('to_date'), function ($query) use ($request) {
+            $query->whereDate('created_at', '<=', $request->to_date);
+        }); // filter by end date
+        
+        $contributions = $query->latest()->get(); // get contributions and order them from latest to oldest
 
-        // Calculates total successful contributions made
-        $totalAmount = Contribution::where('status', 'successful')
-            ->when($request->type, function ($query) use ($request) {
-                $query->where('contribution_type_id', $request->type); // filter by contribution type
-            })
-            ->when($request->month, function ($query) use ($request) {
-                $query->whereMonth('created_at', $request->month); // filter by month
-            })
-            ->when($request->year, function ($query) use ($request) {
-                $query->whereYear('created_at', $request->year); // filter by year
-            })
-        ->sum('amount');
 
+        // calculates total successful contributions
         $totalAmount = $contributions->where('status', 'successful')->sum('amount');
+
+        // calculates total failed contributions
+        $totalFailedAmount = $contributions->where('status', 'failed')->sum('amount');
 
         return view('admin.contribution', compact(
             'contributions',
             'types',
-            'totalAmount'
+            'totalAmount',
+            'totalFailedAmount'
         )); // returns view of all contributions, types and total amount
     }
 }

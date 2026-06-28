@@ -8,8 +8,12 @@
 
     <div class="card shadow-sm mb-4">
         <div class="card-body">
-            <h6 class="text-muted">Total Contributions</h6>
+            <h6 class="text-muted">Total Successful Contributions</h6>
             <h3>KES {{ number_format($totalAmount, 2) }}</h3>
+        </div>
+        <div class="card-body">
+            <h6 class="text-muted">Total Failed Contributions</h6>
+            <h3>KES {{ number_format($totalFailedAmount, 2) }}</h3>
         </div>
     </div>
 
@@ -20,6 +24,7 @@
             <form method="GET" action="{{ route('admin.contributions') }}">
                 <div class="row g-2">
                     <div class="col-md-4">
+                        <label for="type" class="form-label">Contribution Type</label>
                         <select name="type" class="form-control">
                             <option value="">All Contribution Types</option>
 
@@ -28,26 +33,22 @@
                                     {{ $type->name }}
                                 </option>
                             @endforeach
+
                         </select>
                     </div>
 
                     <div class="col-md-3">
-                        <select name="month" class="form-control">
-                            <option value="">All Months</option>
-
-                            @for($m = 1; $m <= 12; $m++)
-                                <option value="{{ $m }}" {{ request('month') == $m ? 'selected' : '' }}>
-                                    {{ DateTime::createFromFormat('!m', $m)->format('F') }}
-                                </option>
-                            @endfor
-                        </select>
+                        <label for="from_date" class="form-label">From Date</label>
+                        <input type="date" name="from_date" id="from_date" class="form-control" placeholder="From date" value="{{ request('from_date') }}">
                     </div>
 
                     <div class="col-md-3">
-                        <input type="number" name="year" class="form-control" placeholder="Year e.g. 2026" value="{{ request('year') }}">
+                        <label for="to_date" class="form-label">To Date</label>
+                        <input type="date" name="to_date" id="to_date" class="form-control" placeholder="To date" value="{{ request('to_date') }}">
                     </div>
 
                     <div class="col-md-2">
+                        <label for="filter" class="form-label">&nbsp;</label>
                         <button class="btn btn-warning w-100">
                             Filter
                         </button>

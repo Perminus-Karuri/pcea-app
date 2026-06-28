@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
+// import model
 use App\Model\Contribution;
 
 class ContributionType extends Model

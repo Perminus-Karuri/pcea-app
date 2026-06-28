@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
 use App\Models\User; // import user model
 use App\Models\Announcement; // import announcement model
 

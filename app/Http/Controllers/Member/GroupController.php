@@ -11,7 +11,7 @@ use App\Models\Announcement; // import announcement model
 
 class GroupController extends Controller
 {
-    // Function to display groups that members can join
+    // Function to display groups that members can join and members in groups they have joined
     public function index() {
         $groups = Group::latest()->get(); // get the groups and order them by newest
 
